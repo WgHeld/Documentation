@@ -25,7 +25,7 @@ end box
 == Dishwasser finished work ==
 DW -> DR: Wash finished
 DR -> DD
-DD -> S: Event: start POST: /
+DD -> S: POST: /api/event/start \n{\n  device: <id>,\n  user: <id>\n}
 S -> D
 
 == User checks WGHeld ==
@@ -43,7 +43,7 @@ activate DD
 U --> DW : closes door
 DW -> DR: Door closed
 DR -> DD
-DD -> S: if longer 3min: Event: end
+DD -> S: <if longer 3min>\nPOST: /api/event/end \n{\n  device: <id>,\n  user: <id>\n}
 deactivate DD
 S -> D
 
@@ -51,5 +51,3 @@ S -> D
 S -> U: Task Done
 U -> S: Claims Task
 S -> D:
-
-
