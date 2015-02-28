@@ -1,0 +1,58 @@
+' Welcome to vizard.io
+' This diagram will be auto-saved in your browser
+'
+' For syntax see PlantUML Language Reference Guide:
+' http://plantuml.sourceforge.net/PlantUML_Language_Reference_Guide.pdf
+
+
+class User{
+  Integer id
+  String name
+
+  Integer score()
+}
+
+class Device{
+  Integer id
+  String real_id
+  String name
+  Enum strategie <countdown/duration/onetime>
+
+  'void methods()
+}
+
+class Task{
+  Integer id
+  Integer user_id
+  Integer device_id
+  Integer points
+
+  'void methods()
+}
+
+class Event{
+  Integer id
+  String device_real_id
+  Datetime timestamp
+  Enum type <start/end>
+
+  'void methods()
+}
+
+/'
+class StatusEvent{
+  Integer id
+  String device_real_id
+  Datetime timestamp
+  Enum type <start/end>
+
+  'void methods()
+}
+'/
+
+
+User  --> "*" Task
+Device --> "*" Task
+Task --> "2" Event
+
+'Device --> "*" StatusEvent
