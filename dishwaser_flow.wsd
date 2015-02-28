@@ -1,0 +1,55 @@
+' Welcome to vizard.io
+' This diagram will be auto-saved in your browser
+'
+' For syntax see PlantUML Language Reference Guide:
+' http://plantuml.sourceforge.net/PlantUML_Language_Reference_Guide.pdf
+
+actor User AS U
+participant Dishwasher AS DW
+participant Relayr AS DR
+
+box "Service" #LightBlue
+  participant DishwasherDeamon AS DD
+end box
+
+box "Krypton" #LightBlue
+  participant Server AS S
+  participant Database AS D
+end box
+
+'== Dishwasser starts work ==
+'DW --> DR: Wash  in progerss
+'DR --> DD
+'DD --> S: Event: progress
+
+== Dishwasser finished work ==
+DW -> DR: Wash finished
+DR -> DD
+DD -> S: Event: start POST: /
+S -> D
+
+== User checks WGHeld ==
+S -> U: Task available
+
+'||50||
+'U --> S: (Starts Task)
+'S --> D
+
+== User empties Dishwasher, (door open 3 minute) ==
+U --> DW : opens door
+DW -> DR: Door open
+DR -> DD
+activate DD
+U --> DW : closes door
+DW -> DR: Door closed
+DR -> DD
+DD -> S: if longer 3min: Event: end
+deactivate DD
+S -> D
+
+== User checks WGHeld ==
+S -> U: Task Done
+U -> S: Claims Task
+S -> D:
+
+
