@@ -7,6 +7,7 @@
 
 class User{
   Integer id
+  String reference
   String name
 
   Integer score()
@@ -14,9 +15,9 @@ class User{
 
 class Device{
   Integer id
-  String real_id
+  String reference
   String name
-  Enum strategie <countdown/duration/onetime>
+  Enum strategy <countdown/duration/onetime>
 
   'void methods()
 }
@@ -26,13 +27,15 @@ class Task{
   Integer user_id
   Integer device_id
   Integer points
+  String state <running/finished>
 
   'void methods()
 }
 
 class Event{
   Integer id
-  String device_real_id
+  String device_reference
+  String user_reference
   Datetime timestamp
   Enum type <start/end>
 
@@ -42,9 +45,8 @@ class Event{
 /'
 class StatusEvent{
   Integer id
-  String device_real_id
+  String device_reference
   Datetime timestamp
-  Enum type <start/end>
 
   'void methods()
 }
